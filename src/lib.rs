@@ -32,7 +32,7 @@ use syn::{parse_macro_input, LitStr};
 ///     "data:text/plain;base64,{}",
 ///     STANDARD.encode("Hello World!")
 /// );
-/// assert_eq!(expected, include_data_uri!("test_cases/text/hello_world.txt"));
+/// assert_eq!(expected, include_data_uri!("tests/cases/text/hello_world.txt"));
 /// ```
 ///
 /// # Panics

@@ -24,3 +24,12 @@ fn image() {
 	);
 	assert_eq!(expected, include_data_uri!("tests/cases/jpeg/naw.jpeg"));
 }
+
+#[test]
+fn code() {
+	let expected = format!(
+		"data:text/x-rust;base64,{}",
+		STANDARD.encode(include_str!("macro.rs"))
+	);
+	assert_eq!(expected, include_data_uri!("tests/macro.rs"))
+}
