@@ -1,6 +1,6 @@
 [package]
 name = "include_data_uri"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Steven vanZyl <rushsteve1@rushsteve1.us>"]
 description = "include a file as a data uri"
@@ -14,6 +14,19 @@ exclude = ["src/test_cases"]
 
 [lib]
 proc-macro = true
+
+[lints.rust]
+unsafe_code = "forbid"
+future_incompatible = "forbid"
+
+[lints.clippy]
+indexing_slicing = "forbid"
+unwrap_used = "deny"
+expect_used = "deny"
+invalid_regex = "deny"
+enum_glob_use = "deny"
+pedantic = "deny"
+nursery = "deny"
 
 [dependencies]
 anyhow = "^1.0"
