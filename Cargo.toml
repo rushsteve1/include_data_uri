@@ -1,0 +1,23 @@
+[package]
+name = "include_data_uri"
+version = "0.1.0"
+edition = "2021"
+authors = ["Steven vanZyl <rushsteve1@rushsteve1.us>"]
+description = "include a file as a data uri"
+repository = "https://github.com/rushsteve1/include_data_uri"
+license = "MIT"
+keywords = ["proc-macro", "base64", "data-uri"]
+categories = ["rust-patterns"]
+exclude = ["src/test_cases"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+proc-macro = true
+
+[dependencies]
+anyhow = "^1.0"
+base64 = "^0.21"
+mime_guess = "^2.0" # TODO explore other options
+quote = "^1.0"
+syn = "^2.0"
