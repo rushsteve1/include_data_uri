@@ -12,7 +12,7 @@ fn text() {
 	);
 	assert_eq!(
 		expected,
-		include_data_uri!("../tests/cases/text/hello_world.txt")
+		include_data_uri!("tests/cases/text/hello_world.txt")
 	);
 }
 
@@ -22,5 +22,5 @@ fn image() {
 		"data:image/jpeg;base64,{}",
 		include_str!("cases/jpeg/naw.base64")
 	);
-	assert_eq!(expected, include_data_uri!("../tests/cases/jpeg/naw.jpeg"));
+	assert_eq!(expected, include_data_uri!("tests/cases/jpeg/naw.jpeg"));
 }

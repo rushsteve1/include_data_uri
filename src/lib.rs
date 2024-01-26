@@ -2,7 +2,7 @@
 //! [Proc Macro](https://doc.rust-lang.org/reference/procedural-macros.html)
 //! library, see [`include_data_uri`] for documentation
 
-use std::{fs::read, path::PathBuf};
+use std::{env, fs::read};
 
 use anyhow::Context;
 use base64::{engine::general_purpose::STANDARD, Engine};
@@ -15,10 +15,12 @@ use syn::{parse_macro_input, LitStr};
 /// gets the file type with [`mime_guess`], and then uses those to create
 /// a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme)
 ///
-/// Like [`std::include_str`] the path given must be a string literal,
-/// however unlike [`std::include_str`] it is NOT relative to the current file
-/// and instead relative to the current project's `src/` folder.
-/// This is due to a limitation in Proc Macros.
+/// Like `include_str` the path given must be a string literal,
+/// however unlike `include_str` it is NOT relative to the current file
+/// and instead relative to the current working directory,
+/// which *should* be the current project's root folder.
+/// This behavior is due to a limitation in Proc Macros, and is subject to
+/// change in a future release of this crate.
 ///
 /// # Examples
 ///
@@ -60,11 +62,11 @@ pub fn include_data_uri(input: TokenStream) -> TokenStream {
 fn inner(path_str: impl Into<String>) -> anyhow::Result<String> {
 	// like include_str! the path is relative to the current file
 	let path_str = path_str.into();
-	let src_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("src");
-	let path = src_dir.join(path_str);
-	let path = path
+	let cwd = env::current_dir()?;
+	let path = cwd
+		.join(&path_str)
 		.canonicalize()
-		.with_context(|| format!("canonicalize path {path:#?}"))?;
+		.with_context(|| format!("canonicalize path {path_str}"))?;
 
 	// The mimetype is determined by the path
 	let mimetype = mime_guess::from_path(&path);
