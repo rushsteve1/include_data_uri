@@ -1,6 +1,6 @@
 [package]
 name = "include_data_uri"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 authors = ["Steven vanZyl <rushsteve1@rushsteve1.us>"]
 description = "include a file as a data uri"
@@ -20,7 +20,6 @@ unsafe_code = "forbid"
 future_incompatible = "forbid"
 
 [lints.clippy]
-indexing_slicing = "forbid"
 unwrap_used = "deny"
 expect_used = "deny"
 invalid_regex = "deny"
